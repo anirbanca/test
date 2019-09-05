@@ -9,8 +9,11 @@ jobs:
 
   steps:
   - script: echo Hello!
+    displayName: 'Hello'
+
   - script: echo Hello1!
-	
+    displayName: 'Hello1'
+
 #########################################################################################################################
 - job: Windows_Sample
   pool:
@@ -24,11 +27,14 @@ jobs:
   
   steps:
   - script: echo Hello2!
-
+    displayName: 'Hello2'
+   
   - script: echo Hello3!
-
+    displayName: 'Hello3'
+    
   - script: echo Hello4!
-	
+    displayName: 'Hello4'
+
 #########################################################################################################################
 
 - job: Bar
@@ -45,3 +51,4 @@ jobs:
     )
   steps:
   - script: echo 'Job Bar'
+    displayName: 'Bar'
