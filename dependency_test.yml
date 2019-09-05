@@ -45,4 +45,4 @@ jobs:
       in(dependencies.Windows_Sample.result, 'Succeeded')
     )
   steps:
-  - script: echo Job Bar
+  - script: echo 'Job Bar'
