@@ -1,0 +1,48 @@
+#Test Config by Anirban Bhattacharya
+name: Pipeline_$(date:yyyyMMdd)-$(Build.BuildId)
+jobs:
+- job: Linux_Sample
+  pool:
+    vmImage: 'ubuntu-16.04'
+  variables:
+  - group: API-Web-Dev-VG
+
+  steps:
+  - script: echo Hello!
+
+  - script: echo Hello1!
+	
+#########################################################################################################################
+- job: Windows_Sample
+  pool:
+    vmImage: 'vs2017-win2016'
+    demands:
+    - msbuild
+    - visualstudio
+    - vstest
+  variables:
+  - group: API-Web-Prod-VG
+  
+  steps:
+  - script: echo Hello2!
+
+  - script: echo Hello3!
+
+  - script: echo Hello4!
+	
+#########################################################################################################################
+
+- job: Bar
+  pool:
+    vmImage: 'vs2017-win2016'
+  dependsOn:
+  - Linux_Sample
+  - Windows_Sample
+  condition: |
+    and
+    (
+      in(dependencies.Linux_Sample.result, 'Succeeded'),
+      in(dependencies.Windows_Sample.result, 'Succeeded')
+    )
+  steps:
+  - script: echo Job Bar
